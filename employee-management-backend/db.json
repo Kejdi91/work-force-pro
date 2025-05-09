@@ -1,0 +1,106 @@
+{
+  "departments": [
+    {
+      "id": 1,
+      "name": "web devs updated",
+      "employee_list": [
+        {
+          "id": 1,
+          "name": "Enes Shala update",
+          "address": "enes.shala@makerminds.org",
+          "email": "044123123",
+          "phone": "044123123"
+        },
+        {
+          "id": 2,
+          "name": "Gerald Bytyqi",
+          "address": "Ferizaj Rruga Deshmoret e Kombit",
+          "email": "enes.shala@makerminds.org",
+          "phone": "044123123"
+        },
+        {
+          "id": 3,
+          "name": "Amir Kuleta",
+          "address": "Ferizaj Rruga Deshmoret e Kombit",
+          "email": "enes.shala@makerminds.org",
+          "phone": "044123123"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Sales Team",
+
+      "employee_list": [
+        {
+          "id": 4,
+          "name": "Amire Ademi",
+          "address": "Ferizaj Rruga Deshmoret e Kombit",
+          "email": "enes.shala@makerminds.org",
+          "phone": "044123123"
+        },
+        {
+          "id": 5,
+          "name": "Leonard Dani",
+          "address": "Ferizaj Rruga Deshmoret e Kombit",
+          "email": "enes.shala@makerminds.org",
+          "phone": "044123123"
+        },
+        {
+          "id": 6,
+          "name": "Blerta Kryeziu",
+          "address": "Ferizaj Rruga Deshmoret e Kombit",
+          "email": "enes.shala@makerminds.org",
+          "phone": "044123123"
+        },
+        {
+          "id": 7,
+          "name": "Kejdi Nela",
+          "address": "rr filan fisteku",
+          "email": "kejdii@gmail.com",
+          "phone": "040432323"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Python Devs",
+      "employee_list": [
+        {
+          "id": 7,
+          "name": "Blerona Abdushi",
+          "address": "Ferizaj Rruga Deshmoret e Kombit",
+          "email": "enes.shala@makerminds.org",
+          "phone": "044123123"
+        },
+        {
+          "id": 8,
+          "name": "Egzon Halimi",
+          "address": "Ferizaj Rruga Deshmoret e Kombit",
+          "email": "enes.shala@makerminds.org",
+          "phone": "044123123"
+        },
+        {
+          "id": 9,
+          "name": "Drin Gashi",
+          "address": "Ferizaj Rruga Deshmoret e Kombit",
+          "email": "enes.shala@makerminds.org",
+          "phone": "044123123"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "employee_list": []
+    },
+    {
+      "id": 7,
+      "name": "test",
+      "employee_list": []
+    }
+  ],
+  "lastUsedId": {
+    "departmentId": 8,
+    "employeeId": 18
+  }
+}
