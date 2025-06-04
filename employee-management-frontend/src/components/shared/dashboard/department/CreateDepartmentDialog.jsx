@@ -24,14 +24,21 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 
+import { useDispatch } from "react-redux"
+
 import {Plus} from "lucide-react"
 import { toast } from "sonner"
+import { useState } from "react"
+import { addDepartment } from "../../../../store/departmentsSlice"
 
 const formSchema = z.object({
     name: z.string().min(2,{message:"Name of department must be at least 2 characters long."})
 })
 
 const CreateDepartmentDialog = () => {
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues:{
@@ -40,8 +47,35 @@ const CreateDepartmentDialog = () => {
   });
 
   const onSubmit = async (data) => {
-    toast(`data:${data.name}`);
-    console.log(data);
+    setLoading(true);
+    try {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/deaprtments/create`,{
+        method: "POST",
+        headers: {
+          "Content-Type" : "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(data)
+      })
+
+      if(!response.ok){
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to create department")
+      }
+
+      const result = await response.json();
+
+      dispatch(addDepartment(result))
+      toast.success("Success", { description: `Department "${result.name}" created successfully`,});
+
+      form.reset();
+    } catch (error) {
+      toast.error("Error", {description: error.message});
+    }finally{
+      setLoading(false);
+    }
+    
+    
   }
   
     return (
@@ -71,13 +105,12 @@ const CreateDepartmentDialog = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <DialogFooter>
+          <Button type="submit" disable={loading}>{loading ? "Creating..." : "Save changes"}</Button>
+        </DialogFooter>
       </form>
     </Form>
-        <DialogFooter>
-          <Button type="submit">Save changes</Button>
-        </DialogFooter>
-      </DialogContent>
+    </DialogContent>
     </Dialog>
   )
 }

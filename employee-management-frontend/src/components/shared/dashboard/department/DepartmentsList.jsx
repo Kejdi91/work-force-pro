@@ -8,31 +8,30 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Pencil, Trash } from 'lucide-react';
+import { Pencil,  } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchDepartments } from '@/store/departmentsSlice';
 import { Link } from 'react-router-dom';
+import DeleteButton from './DeleteButton';
 
 const DepartmentsList = ({ isListView }) => {
   const dispatch = useDispatch();
   const { departments, loading, error } = useSelector((state) => state.departments);
-
   useEffect(() => {
     dispatch(fetchDepartments());
   }, [dispatch]);
-
+  const handleDepartmentDeleted = () => {
+    dispatch(fetchDepartments());
+  }
   if (loading) {
     return <p>Loading departments...</p>;
   }
-
   if (error) {
     return <p className="text-red-500">Error: {error}</p>;
   }
-
   if (departments.length === 0) {
     return <p>No departments found.</p>;
   }
-
   return (
     <div>
       {isListView ? (
@@ -44,24 +43,24 @@ const DepartmentsList = ({ isListView }) => {
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
-          <TableBody>
-            {departments.map((department) => (
-              <TableRow key={department.id}>
-                <TableCell className="font-medium capitalize">
-                  {department.name}
-                </TableCell>
-                <TableCell>{department.employee_count || 0}</TableCell>
-                <TableCell className="text-right flex justify-end gap-2">
-                  <Button variant="outline" size="icon">
-                    <Pencil />
-                  </Button>
-                  <Button variant="outline" size="icon">
-                    <Trash />
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
+<TableBody>
+  {departments.map((department) => (
+    <TableRow key={department.id}>
+      <TableCell className="font-medium capitalize">
+        {department.name}
+      </TableCell>
+      <TableCell>{department.employee_count || 0}</TableCell>
+      <TableCell className="text-right flex justify-end gap-2">
+        <Button variant="outline" size="icon" asChild>
+          <Link to={`/edit-department/${department.id}`}>
+            <Pencil />
+          </Link>
+        </Button>
+          <DeleteButton departmentId= {department.id} departmentName={department.name} onDeleted={handleDepartmentDeleted} />
+      </TableCell>
+    </TableRow>
+  ))}
+</TableBody>
         </Table>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -90,5 +89,4 @@ const DepartmentsList = ({ isListView }) => {
     </div>
   );
 };
-
 export default DepartmentsList;

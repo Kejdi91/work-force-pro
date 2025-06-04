@@ -3,7 +3,7 @@ export const fetchDepartments = createAsyncThunk(
     "departments/fetchAll",
     async (_, { rejectWithValue }) => {
         try {
-            const response = await fetch("http://localhost:8095/api/departments", {
+            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/departments`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

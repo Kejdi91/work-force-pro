@@ -6,6 +6,7 @@ import OverviewPage from "./pages/dashboard/overview/OverviewPage";
 import EmployeesPage from "./pages/dashboard/Employees/EmployeesPage";
 import { Toaster } from "@/components/ui/sonner"
 import PrivateRoute from "./lib/PrivateRoute";
+import EditDepartmentPage from "./pages/dashboard/overview/EditDepartmentPage";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
           {/* Protected Routes */}
           <Route path="/overview" element={<PrivateRoute> <OverviewPage/> </PrivateRoute>}/>
           <Route path="/employees" element={<PrivateRoute> <EmployeesPage/> </PrivateRoute>}/>
+          <Route path="/edit-department/:id" element={<PrivateRoute> <EditDepartmentPage/> </PrivateRoute>}/>
           </Routes>
           <Toaster/>
     </Router>
