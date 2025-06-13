@@ -47,9 +47,9 @@ const CreateDepartmentDialog = () => {
   });
 
   const onSubmit = async (data) => {
-    setLoading(true);
+    setLoading(true);                                              
     try {
-      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/deaprtments/create`,{
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/departments/create `,{
         method: "POST",
         headers: {
           "Content-Type" : "application/json",

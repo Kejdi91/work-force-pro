@@ -41,7 +41,7 @@ const CreateEmployeeDialog = () => {
   const onSubmit = async (values) => {
     setLoading(true);
     try {
-      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/auth/register`, {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

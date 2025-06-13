@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -7,40 +7,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { toast } from "sonner";
 import EditEmployeeDepartment from "./EditEmployeeDepartment";
 
-export const EmployeesList = ({ employees }) => {
-  const [updatedEmployees, setUpdatedEmployees] = useState(employees);
-  const [departments, setDepartments] = useState([]);
-
-  useEffect(() => {
-    const fetchDepartments = async () => {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_BASE_URL}/departments`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch departments.");
-        }
-
-        const data = await response.json();
-        setDepartments(data);
-      } catch (error) {
-        toast.error("Failed to fetch departments", {
-          description: error.message,
-        });
-      }
-    };
-
-    fetchDepartments();
-  }, []);
+export const EmployeesList = ({ employees, departments = [], loading, error }) => {
+  const [updatedEmployees, setUpdatedEmployees] = useState(employees || []);
 
   const handleDepartmentUpdated = (userId, newDepartmentId) => {
     setUpdatedEmployees((prev) =>
@@ -50,8 +20,7 @@ export const EmployeesList = ({ employees }) => {
               ...emp,
               department_id: newDepartmentId,
               department_name:
-                departments.find((dept) => dept.id === Number(newDepartmentId))
-                  ?.name || "Unknown",
+                departments.find((dept) => dept.id === Number(newDepartmentId))?.name || "Unknown",
             }
           : emp
       )
@@ -73,7 +42,7 @@ export const EmployeesList = ({ employees }) => {
           </TableHeader>
           <TableBody>
             {updatedEmployees.map((employee, index) => (
-              <TableRow key={employee.user_id}>
+              <TableRow key={index}>
                 <TableCell>{index + 1}</TableCell>
                 <TableCell>{employee.user_name}</TableCell>
                 <TableCell>{employee.email}</TableCell>
@@ -81,9 +50,11 @@ export const EmployeesList = ({ employees }) => {
                 <TableCell>
                   <EditEmployeeDepartment
                     userId={employee.user_id}
-                    currentDepartment={employee.department_name}
-                    departs={departments}
+                    currentDepartmentName={employee.department_name}
+                    departments={departments}
                     onDepartmentUpdated={handleDepartmentUpdated}
+                    loading={loading}
+                    error={error}
                   />
                 </TableCell>
               </TableRow>

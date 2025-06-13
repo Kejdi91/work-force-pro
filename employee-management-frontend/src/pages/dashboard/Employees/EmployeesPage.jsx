@@ -21,12 +21,17 @@ function EmployeesPage() {
     <Header title="Employee Managment" subtitle="here us can  manage all users ">
        <CreateEmployeeDialog/>
     </Header>
-    {loading ? (<p className="text-center text-red-500">loading employees...</p>) : error ? (<p className="text-center text-red-500">Failed to fetch employees</p>) : (
+    {loading ? (
+      <p className="text-center text-red-500">loading employees...</p>
+    ) : error ? (
+      <p className="text-center text-red-500">Failed to fetch employees</p>
+    ) : (
       <EmployeesList employees={employees} />
     )}
     </DashboardLayout>
-  )
-}
+  );
+};
+
 export default EmployeesPage
 
 

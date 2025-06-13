@@ -17,24 +17,30 @@ import DeleteButton from './DeleteButton';
 const DepartmentsList = ({ isListView }) => {
   const dispatch = useDispatch();
   const { departments, loading, error } = useSelector((state) => state.departments);
+ 
   useEffect(() => {
     dispatch(fetchDepartments());
   }, [dispatch]);
+  
   const handleDepartmentDeleted = () => {
     dispatch(fetchDepartments());
   }
+  
   if (loading) {
     return <p>Loading departments...</p>;
   }
+  
   if (error) {
     return <p className="text-red-500">Error: {error}</p>;
   }
+  
   if (departments.length === 0) {
     return <p>No departments found.</p>;
   }
+  
   return (
     <div>
-      {isListView ? (
+      { isListView  ?  (
         <Table>
           <TableHeader>
             <TableRow>

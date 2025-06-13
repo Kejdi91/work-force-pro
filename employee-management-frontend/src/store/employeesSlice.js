@@ -3,7 +3,7 @@ export const fetchEmployees = createAsyncThunk(
     "employees/fetchEmployees",
     async(_, {rejectedWithValue}) => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/employees/all-users`,{
+            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/employees/all-users`,{
                 headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -41,9 +41,3 @@ const employeesSlice = createSlice({
     }
 })
 export default employeesSlice.reducer;
-
-
-
-
-
-

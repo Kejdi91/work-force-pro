@@ -22,27 +22,30 @@ import {
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
+
 const DepartmentEmployees = () => {
   const { id: selectedDepartmentId } = useParams();
   const [employees, setEmployees] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [loading, setLoading] = useState(false);
+  
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
         const [employeeRes, departmentsRes] = await Promise.all([
-          fetch(`${import.meta.env.VITE_BASE_URL}/api/employees/departement/${selectedDepartmentId}`, {
+          fetch(`${import.meta.env.VITE_BASE_URL}/employees/departement/${selectedDepartmentId}`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
           }),
-          fetch(`${import.meta.env.VITE_BASE_URL}/api/departments`, {
+          fetch(`${import.meta.env.VITE_BASE_URL}/departments`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
           }),
         ]);
+        
         if (!employeeRes.ok) throw new Error("Failed to fetch employees");
         const employeesData = await employeeRes.json();
         const departmentsData = await departmentsRes.json();
@@ -56,11 +59,12 @@ const DepartmentEmployees = () => {
         setLoading(false);
       }
     };
+    
     fetchData();
   }, [selectedDepartmentId]);
   const handleDepartmentChange = async (userId, newDepartmentId) => {
   try {
-    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/employees/update-department`, {
+    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/employees/update-department`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
