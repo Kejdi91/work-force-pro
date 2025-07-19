@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import DashboardLayout from '../DashboardLayout'
 import Header from '../../../components/shared/dashboard/Header'
 import CreateDepartmentDialog from '../../../components/shared/dashboard/department/CreateDepartmentDialog'
-import Stats from '../../../components/shared/dashboard/stats/stats'
+import Stats from '@/components/shared/dashboard/stats/Stats'
 
 import {Button} from "@/components/ui/button"
 import { LayoutDashboard, ListTodo } from 'lucide-react'
